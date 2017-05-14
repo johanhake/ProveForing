@@ -8,7 +8,7 @@ class Exercises extends Component {
     this.state = {
 
       // Array of arrays with exercises. The sub array contains the number of sub parts of the exercises.
-      Parts: [[[2]]],
+      Parts: [[[2, 1, 2, 3], [2, 3, 4, 2]]],
     };
   }
 
@@ -33,11 +33,11 @@ class Exercises extends Component {
       return (
         <Part
           key={partIndex}
-          exercises = exercises
-          partIndex = partIndex
-          onExerciseAdd = onExerciseAdd
-          onSubExerciseAdd = onSubExerciseAdd
-          onSubExerciseChangePoints = onSubExerciseChangePoints
+          exercises = {exercises}
+          partIndex = {partIndex}
+          onExerciseAdd = {this.onExerciseAdd}
+          onSubExerciseAdd = {this.onSubExerciseAdd}
+          onSubExerciseChangePoints = {this.onSubExerciseChangePoints}
         />
       );
     });
