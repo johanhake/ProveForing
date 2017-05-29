@@ -1,6 +1,7 @@
 import React from 'react';
 import Exercise from './Exercise';
 
+// Part represents a part of a test. A Part consists of exercises
 const Part = (props) => {
 
   console.log(props.exercises);

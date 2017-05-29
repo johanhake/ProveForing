@@ -8,7 +8,7 @@ class Exercises extends Component {
     this.state = {
 
       // Array of arrays with exercises. The sub array contains the number of sub parts of the exercises.
-      Parts: [[[2, 1, 2, 3], [2, 3, 4, 2]]],
+      Parts: [[[2, 1, 2, 3, 5, 3], [2, 3, 4, 2]]],
     };
   }
 
