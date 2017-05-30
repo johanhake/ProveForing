@@ -27,7 +27,20 @@ const Part = (props) => {
       );
     });
 
-  return <div className="part">{exercises}</div>
+  // Add all points for the parts. Flatten the arrays first
+  const sumPoints = [].concat.apply([], props.exercises).reduce((a, b) => a + b);
+
+  return(
+    <div className="part">
+      {exercises}
+      <div className="exercise">
+        <div className="subExercise">
+          <div className="exerciseLabel">&Sigma;</div>
+          <div className="subExerciseLabel"></div>
+          <div className="pointField exerciseLabel" >{sumPoints}</div>
+        </div>
+      </div>
+    </div>);
 };
 
 export default Part;
