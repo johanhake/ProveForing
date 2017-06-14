@@ -14,24 +14,41 @@ class Exercises extends Component {
 
     // Bind this for each method
     this.onSubExerciseChangePoints = this.onSubExerciseChangePoints.bind(this);
+    this.onExerciseAdd = this.onExerciseAdd.bind(this);
+    this.onExerciseAdd = this.onExerciseAdd.bind(this);
+    this.onExerciseRemove = this.onExerciseRemove.bind(this);
+    this.onSubExerciseAdd = this.onSubExerciseAdd.bind(this);
+    this.onSubExerciseRemove = this.onSubExerciseRemove.bind(this);
+
   }
 
   // Callback for adding exercises.
-  onExerciseAdd() {
+  onExerciseAdd(partIndex) {
+
+  }
+
+  // Callback for removing exercises.
+  onExerciseRemove(partIndex) {
 
   }
 
   // Callback for adding sub-exercises
-  onSubExerciseAdd() {
+  onSubExerciseAdd(partIndex, exerciseIndex) {
+
+  }
+
+  // Callback for removing sub-exercises
+  onSubExerciseRemove(partIndex, exerciseIndex) {
 
   }
 
   // Callback for changing point for sub-exercise
-  onSubExerciseChangePoints(part, exercise, subExercise, value) {
-    console.log("call", part, exercise, subExercise, value);
+  onSubExerciseChangePoints(partIndex, exerciseIndex, subExerciseIndex, value) {
+    console.log("call", partIndex, exerciseIndex, subExerciseIndex, value);
     console.log("state", this.state.Parts);
-    const newParts = update(this.state.Parts, {part: {exercise: {subExercise: {$set: value}}}});
-    console.log("updated", newParts);
+    const Parts = update(this.state.Parts, {[partIndex]: {[exerciseIndex]: {$splice: [[subExerciseIndex, 1, Number(value)]]}}});
+    this.setState({Parts});
+    console.log("updated", this.state.Parts);
   }
 
   // Render the different parts of the exercises

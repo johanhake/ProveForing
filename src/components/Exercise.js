@@ -3,15 +3,18 @@ import React from 'react';
 // Helper function to return a label for an exercise
 const LastColumn = (props) => {
   const numSubExercises = props.numSubExercises;
+  const onSubExerciseAdd = props.onSubExerciseAdd;
+  const onSubExerciseRemove = props.onSubExerciseRemove;
     return (
     <div key={numSubExercises} className="subExercise">
       <div className="exerciseLabel">
-        <i className="fa fa-plus-circle fa-lg" aria-hidden="true"></i>
+        <i className="fa fa-plus-circle addExercise" aria-hidden="true"></i>
       </div>
       <div className="subExerciseLabel">
-        <i className="fa fa-plus-circle" aria-hidden="true"></i>
       </div>
-      <div className="pointField"></div>
+      <div className="pointField">
+        <i className="fa fa-plus-circle addSubExercise" aria-hidden="true"></i>
+      </div>
     </div>
     );
 }
@@ -23,14 +26,16 @@ function subExerciseLabel(subExerciseIndex, numSubExercises) {
   return String.fromCharCode(97+subExerciseIndex);
 }
 
-function changePoints(onSubExerciseChangePoints, partIndex, exerciseIndex, subExerciseIndex) {
+// Returns a function for changing points
+function createChangePoints(onSubExerciseChangePoints) {
+  return function(event) {
+    const point = event.target;
 
-  console.log("create", partIndex, exerciseIndex, subExerciseIndex);
-  var localValues = [partIndex, exerciseIndex, subExerciseIndex];
-  return function(value) {
-    console.log("change", localValues, value);
-    onSubExerciseChangePoints(localValues[0], localValues[1], localValues[2], value);
-  };
+    // Collect the part, exercise and subexercise indices from the input elements
+    onSubExerciseChangePoints(point.getAttribute("data-partindex"),
+      point.getAttribute("data-exerciseindex"),
+      point.getAttribute("data-subexerciseindex"), point.value);
+  }
 }
 
 // An Exercise concists of sub-exercises, typically a, b, c, d.
@@ -58,15 +63,20 @@ const Exercise = (props) => {
           subExerciseIndex===0 ? exerciseIndex+1 : ""}</div>
         <div className="subExerciseLabel">{subExerciseLabel(subExerciseIndex, numSubExercises)}</div>
         <input className="pointField"
+               data-partindex = {partIndex}
+               data-exerciseindex = {exerciseIndex}
+               data-subexerciseindex = {subExerciseIndex}
                type="number"
-               value={subExercise}
-               onChange={changePoints(onSubExerciseChangePoints, partIndex, exerciseIndex, subExerciseIndex)}/>
+               min="0"
+               max="10"
+               value={props.subExercises[subExerciseIndex]}
+               onChange={createChangePoints(onSubExerciseChangePoints)}/>
       </div>
     );
     });
 
   // Push the last column
-  let lastColumn = LastColumn({numSubExercises});
+  let lastColumn = LastColumn({numSubExercises, onSubExerciseAdd, });
   subExercises.push(lastColumn);
 
   return (
