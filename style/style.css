@@ -33,6 +33,11 @@ html {
     grid-template-rows: 3fr 3fr 4fr;
 }
 
+.addLabel:focus, .addLabel:hover {
+    color: #1779ba; /* How to use Foundations primary color*/
+    outline: none;
+}
+
 .subExerciseLabel {
     text-align: center;
     width: 100%;

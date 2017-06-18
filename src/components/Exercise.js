@@ -1,19 +1,44 @@
 import React from 'react';
 
+// Returns a function for changing points
+function createAddSubExercise(onSubExerciseAdd) {
+  return function(event) {
+    const pluss = event.target;
+
+    // Collect the part, exercise and subexercise indices from the input elements
+    onSubExerciseAdd(pluss.getAttribute("data-partindex"),
+      pluss.getAttribute("data-exerciseindex"));
+  }
+}
+
 // Helper function to return a label for an exercise
 const LastColumn = (props) => {
+  const partIndex = props.partIndex;
+  const exerciseIndex = props.exerciseIndex;
   const numSubExercises = props.numSubExercises;
   const onSubExerciseAdd = props.onSubExerciseAdd;
-  const onSubExerciseRemove = props.onSubExerciseRemove;
+  const onExerciseAdd = props.onExerciseAdd;
     return (
     <div key={numSubExercises} className="subExercise">
       <div className="exerciseLabel">
-        <i className="fa fa-plus-circle addExercise" aria-hidden="true"></i>
+        <i
+          className="fa fa-plus-circle addExercise addLabel"
+          tabIndex={1}
+          data-partindex = {partIndex}
+          data-exerciseindex = {exerciseIndex}
+        >
+        </i>
       </div>
       <div className="subExerciseLabel">
       </div>
       <div className="pointField">
-        <i className="fa fa-plus-circle addSubExercise" aria-hidden="true"></i>
+        <i
+          className="fa fa-plus-circle addSubExercise addLabel"
+          tabIndex={1}
+          data-partindex = {partIndex}
+          data-exerciseindex = {exerciseIndex}
+          onClick={createAddSubExercise(onSubExerciseAdd)}>
+        </i>
       </div>
     </div>
     );
@@ -70,13 +95,14 @@ const Exercise = (props) => {
                min="0"
                max="10"
                value={props.subExercises[subExerciseIndex]}
+               tabIndex={1}
                onChange={createChangePoints(onSubExerciseChangePoints)}/>
       </div>
     );
     });
 
   // Push the last column
-  let lastColumn = LastColumn({numSubExercises, onSubExerciseAdd, });
+  let lastColumn = LastColumn({numSubExercises, onSubExerciseAdd, exerciseIndex, partIndex});
   subExercises.push(lastColumn);
 
   return (

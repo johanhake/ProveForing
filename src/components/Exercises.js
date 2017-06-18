@@ -34,7 +34,8 @@ class Exercises extends Component {
 
   // Callback for adding sub-exercises
   onSubExerciseAdd(partIndex, exerciseIndex) {
-
+    const Parts = update(this.state.Parts, {[partIndex]: {[exerciseIndex]: {$push: [2]}}});
+    this.setState({Parts});
   }
 
   // Callback for removing sub-exercises
@@ -44,11 +45,11 @@ class Exercises extends Component {
 
   // Callback for changing point for sub-exercise
   onSubExerciseChangePoints(partIndex, exerciseIndex, subExerciseIndex, value) {
-    console.log("call", partIndex, exerciseIndex, subExerciseIndex, value);
-    console.log("state", this.state.Parts);
+    //console.log("call", partIndex, exerciseIndex, subExerciseIndex, value);
+    //console.log("state", this.state.Parts);
     const Parts = update(this.state.Parts, {[partIndex]: {[exerciseIndex]: {$splice: [[subExerciseIndex, 1, Number(value)]]}}});
     this.setState({Parts});
-    console.log("updated", this.state.Parts);
+    //console.log("updated", this.state.Parts);
   }
 
   // Render the different parts of the exercises
