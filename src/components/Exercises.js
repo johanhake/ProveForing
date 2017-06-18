@@ -67,7 +67,7 @@ class Exercises extends Component {
     });
 
     return (
-      <div>
+      <div className="parts">
         {parts}
       </div>
     );

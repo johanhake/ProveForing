@@ -2,9 +2,11 @@ html {
     font-size: 20px;
 }
 
+.parts {
+}
+
 .part {
-    display: grid;
-    grid-template-columns: repeat(10, 1fr);
+    display: flex;
 }
 
 .exercise {
@@ -20,8 +22,7 @@ html {
 }
 
 .subExercises {
-    display: grid;
-    grid-template-columns: repeat(10, 1fr);
+    display: flex;
     height: 5rem;
     width: auto;
 }
