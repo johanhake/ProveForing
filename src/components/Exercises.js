@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Part from './Part';
-import update from 'react-addons-update';
+import update from 'immutability-helper';
 
 class Exercises extends Component {
   constructor(props) {
